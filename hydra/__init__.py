@@ -11,6 +11,10 @@ def is_available():
     return comm_pipe_out is not None
 
 
+def is_first_execution():
+    return retrieved_checkpoint is not None
+
+
 class checkpoint:
     def __init__(self):
         self._linked_files = []
@@ -34,7 +38,7 @@ class checkpoint:
         return None
 
 
-def restore_checkpoint():
+def _restore_checkpoint():
     if not os.path.exists('/tmp/__hydra_checkpoint.json'):
         return None
     with open('/tmp/__hydra_checkpoint.json') as json_file:
@@ -42,6 +46,13 @@ def restore_checkpoint():
         for key, value in json.load(json_file).items():
             setattr(ck, key, value)
         return ck
+
+
+retrieved_checkpoint = _restore_checkpoint()
+
+
+def restore_checkpoint():
+    return retrieved_checkpoint
 
 
 def set_eta(eta):
