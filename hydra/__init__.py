@@ -12,7 +12,7 @@ def is_available():
 
 
 def is_first_execution():
-    return retrieved_checkpoint is not None
+    return retrieved_checkpoint is None
 
 
 class checkpoint:
