@@ -7,7 +7,7 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name="python-hydra",
-    version="1.1.1",
+    version="1.2.0",
     description="Python API for interfacing with Hydra Execution Environment",
     long_description=README,
     long_description_content_type="text/markdown",
@@ -26,3 +26,7 @@ setup(
     entry_points={
     },
 )
+
+# rm dist/*
+# python3 setup.py sdist bdist_wheel
+# twine upload dist/*
