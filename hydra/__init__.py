@@ -59,3 +59,15 @@ def set_eta(eta):
     comm_pipe_out.write(json.dumps({'_request_type': 'set_eta', 'millisec': int(eta * 1000)}))
     comm_pipe_out.write('\0')
     comm_pipe_out.flush()
+
+
+def save_output(obj, name=None):
+    req = {
+        '_request_type': 'produced_output',
+        'data': obj
+    }
+    if name:
+        req['name'] = name
+    comm_pipe_out.write(json.dumps(req, default=lambda o: o.__dict__))
+    comm_pipe_out.write('\0')
+    comm_pipe_out.flush()
